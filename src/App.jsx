@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import portrait from '../assets/portrait-color-web.jpg'
 import comicLianqi from '../assets/comic-lianqi-web.jpg'
 import comicDaxia from '../assets/comic-daxia-web.jpg'
@@ -10,7 +10,6 @@ import paperWifePoster from '../assets/short-paper-wife.png'
 import weightlessPoster from '../assets/short-one-minute-weightless.png'
 import TrueFocus from './components/TrueFocus/TrueFocus'
 
-const ShapeBlur = lazy(() => import('./components/ShapeBlur/ShapeBlur'))
 const publicAsset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 
 const Arrow = ({ diagonal = false }) => (
@@ -314,7 +313,6 @@ function GameOrbit({ items, onPreview }) {
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [videoReady, setVideoReady] = useState(false)
   const [activePreview, setActivePreview] = useState(null)
   const [activeSection, setActiveSection] = useState('top')
 
@@ -398,38 +396,7 @@ function App() {
               />
             </h1>
             <p className="hero-specialty">海外游戏广告 <span>／</span> AI 影像创作</p>
-            <div className="hero-actions">
-              <button className="hero-cta" onClick={() => go('#videos')}>查看精选作品 <Arrow /></button>
-              <a className="hero-resume" href={`${import.meta.env.BASE_URL}files/song-jiale-resume.pdf`} download="宋家乐-视觉AI设计师-简历.pdf">下载简历 ↓</a>
-            </div>
           </div>
-          <figure className="hero-feature">
-            <div className="hero-feature-frame">
-              <div className="hero-media" aria-hidden="true">
-                <img src={awardPoster} alt="" fetchPriority="high" />
-                <video
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  poster={awardPoster}
-                  onCanPlay={() => setVideoReady(true)}
-                  className={videoReady ? 'is-ready' : ''}
-                >
-                  <source src={publicAsset('hero-video.mp4')} type="video/mp4" />
-                </video>
-              </div>
-              <div className="shape-blur-layer" aria-hidden="true">
-                <Suspense fallback={null}>
-                  <ShapeBlur variation={0} pixelRatioProp={window.devicePixelRatio || 1} shapeSize={0.5} roundness={0.5} borderSize={0.05} circleSize={0.5} circleEdge={0.7} />
-                </Suspense>
-              </div>
-            </div>
-            <figcaption>
-              <span>《醒狮入梦》<small>中国好创意 · 全国总决赛一等奖</small></span>
-              <button type="button" onClick={() => go('#work')} aria-label="查看醒狮入梦获奖作品"><Arrow diagonal /></button>
-            </figcaption>
-          </figure>
         </div>
       </section>
 
