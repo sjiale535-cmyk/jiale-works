@@ -140,9 +140,21 @@ function OrbitVideo({ item, active }) {
 
 function GameOrbit({ items, onPreview }) {
   const [rotation, setRotation] = useState(0)
+  const [inView, setInView] = useState(false)
+  const [hasEntered, setHasEntered] = useState(false)
+  const orbitRef = useRef(null)
   const drag = useRef({ active: false, moved: false, startX: 0, startRotation: 0, itemIndex: null })
   const angleStep = 360 / items.length
   const frontIndex = ((Math.round(-rotation / angleStep) % items.length) + items.length) % items.length
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      setInView(entry.isIntersecting)
+      if (entry.isIntersecting) setHasEntered(true)
+    }, { threshold: 0.15 })
+    observer.observe(orbitRef.current)
+    return () => observer.disconnect()
+  }, [])
 
   const openPreview = (item) => {
     onPreview({
@@ -188,6 +200,7 @@ function GameOrbit({ items, onPreview }) {
   return (
     <div
       className="game-orbit"
+      ref={orbitRef}
       onPointerDown={startDrag}
       onPointerMove={moveDrag}
       onPointerUp={endDrag}
@@ -218,7 +231,7 @@ function GameOrbit({ items, onPreview }) {
                 zIndex: Math.round((depth + 1) * 50),
               }}
             >
-              <OrbitVideo item={item} active={isFront} />
+              {hasEntered && <OrbitVideo item={item} active={inView && isFront} />}
               <div className="orbit-card-shade" />
               <span className="orbit-index">{item.no}</span>
               <div className="orbit-label">
@@ -244,7 +257,6 @@ function App() {
   const [videoReady, setVideoReady] = useState(false)
   const [activePreview, setActivePreview] = useState(null)
   const [activeSection, setActiveSection] = useState('top')
-  const [gameGroup, setGameGroup] = useState('merge')
 
   useEffect(() => {
     const items = document.querySelectorAll('[data-reveal]')
@@ -257,7 +269,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const sectionIds = ['top', 'about', 'videos', 'comic']
+    const sectionIds = ['top', 'about', 'videos', 'merge-ads', 'comic']
     const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean)
     const observer = new IntersectionObserver(
       entries => {
@@ -327,7 +339,7 @@ function App() {
           <div className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
             <button className={activeSection === 'top' ? 'is-active' : ''} onClick={() => go('#top')}>首页</button>
             <button className={activeSection === 'about' ? 'is-active' : ''} onClick={() => go('#about')}>关于</button>
-            <button className={activeSection === 'videos' ? 'is-active' : ''} onClick={() => go('#videos')}>游戏广告</button>
+            <button className={['videos', 'merge-ads'].includes(activeSection) ? 'is-active' : ''} onClick={() => go('#videos')}>游戏广告</button>
             <button className={activeSection === 'comic' ? 'is-active' : ''} onClick={() => go('#comic')}>AI漫剧</button>
           </div>
           <a className="nav-contact" href="mailto:2949026597@qq.com">
@@ -412,7 +424,7 @@ function App() {
         </div>
       </section>
 
-      <section className="video-showcase section shell" id="videos">
+      <section className="video-showcase section shell" id="videos" aria-labelledby="foundation-heading">
         <header className="section-head" data-reveal>
           <span>02 / MOTION WORKS</span>
           <p>以高密度叙事、玩法展示和卖点包装，回应海外游戏投放场景。</p>
@@ -421,24 +433,29 @@ function App() {
         <div className="video-category game-category">
           <div className="video-category-head" data-reveal>
             <div>
-              <span>GAME PERFORMANCE CREATIVE</span>
-              <h2>游戏买量</h2>
-              <div className="game-title-list">
-                <button type="button" aria-pressed={gameGroup === 'merge'} onClick={() => setGameGroup('merge')}>Merge 游戏广告</button>
-                <button type="button" aria-pressed={gameGroup === 'foundation'} onClick={() => setGameGroup('foundation')}>{foundationName}</button>
-              </div>
+              <span>FUNPLUS · SLG 游戏广告</span>
+              <h2 id="foundation-heading" className="foundation-title">{foundationName}</h2>
             </div>
-            {gameGroup === 'merge' ? (
-              <p>《Shine On, Bella: Merge &amp; Love》与《Pretty Boutique: Merge &amp; Love》的海外买量素材，覆盖剧情开场、玩法展示与卖点包装。</p>
-            ) : (
-              <p>FunPlus 海外 SLG 项目。参与分镜设计、AI 视频制作、后期剪辑与素材风格迭代，本组展示 7 条广告。</p>
-            )}
+            <p>参与分镜设计、AI 视频制作、后期剪辑与素材风格迭代。本项目展示 7 条海外买量广告。</p>
           </div>
           <div data-reveal>
-            <GameOrbit key={gameGroup} items={gameGroup === 'merge' ? gameVideos : foundationVideos} onPreview={setActivePreview} />
+            <GameOrbit items={foundationVideos} onPreview={setActivePreview} />
           </div>
         </div>
 
+      </section>
+
+      <section className="video-showcase section shell" id="merge-ads" aria-labelledby="merge-heading">
+        <div className="video-category-head" data-reveal>
+          <div>
+            <span>触宝科技 · MERGE 游戏广告</span>
+            <h2 id="merge-heading">Merge 游戏买量</h2>
+          </div>
+          <p>《Shine On, Bella: Merge &amp; Love》与《Pretty Boutique: Merge &amp; Love》的海外买量素材，覆盖剧情开场、玩法展示与卖点包装。</p>
+        </div>
+        <div data-reveal>
+          <GameOrbit items={gameVideos} onPreview={setActivePreview} />
+        </div>
       </section>
 
       <section className="comic-page section shell" id="comic">

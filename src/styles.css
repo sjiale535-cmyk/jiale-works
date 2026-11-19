@@ -154,10 +154,8 @@ section, footer { scroll-margin-top: 86px; }
 .video-category-head span { color: var(--accent); font-size: 12px; letter-spacing: .16em; }
 .video-category-head h2 { margin: 14px 0 0; font-size: clamp(52px, 4.8vw, 84px); line-height: .95; letter-spacing: -.05em; font-weight: 500; }
 .video-category-head p { max-width: 600px; margin: 0; color: #aeb5b1; font-size: 16px; line-height: 1.85; }
-.game-title-list { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 25px; }
-.game-title-list button { padding: 11px 16px; border: 1px solid rgba(53,229,223,.32); border-radius: 99px; color: #d7e4e1; background: rgba(53,229,223,.045); font: inherit; font-size: 13px; cursor: pointer; }
-.game-title-list button[aria-pressed="true"] { border-color: var(--accent); color: var(--accent); background: rgba(53,229,223,.12); }
-.game-title-list button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.video-category-head .foundation-title { font-size: clamp(36px, 5vw, 78px); line-height: 1.04; }
+#merge-ads { border-top: 1px solid var(--line); }
 .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); align-items: start; gap: 44px 20px; }
 .video-card { min-width: 0; }
 .video-frame { position: relative; aspect-ratio: 9 / 16; overflow: hidden; background: #111518; border: 1px solid rgba(255,255,255,.1); }
