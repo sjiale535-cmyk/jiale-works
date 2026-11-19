@@ -44,6 +44,21 @@ const gameVideos = Array.from({ length: gameNames.length }, (_, index) => ({
   format: '海外竖屏游戏买量素材',
 }))
 
+const foundationName = 'Foundation: Galactic Frontier'
+const foundationVideos = Array.from({ length: 7 }, (_, index) => {
+  const no = String(index + 1).padStart(2, '0')
+  return {
+    src: publicAsset(`videos/game/foundation/${no}.mp4`),
+    no,
+    title: `Creative ${no}`,
+    gameName: foundationName,
+    role: '分镜设计 / AI 视频生成 / 剪辑包装',
+    tools: 'Codex / Seedream / Seedance / 剪映',
+    format: '海外 SLG 游戏买量广告',
+    detail: 'FunPlus 实习项目，参与镜头设计、AI 视频制作及素材版本迭代。',
+  }
+})
+
 const comicProjects = [
   {
     no: '01',
@@ -136,7 +151,7 @@ function GameOrbit({ items, onPreview }) {
       title: item.gameName || '游戏买量广告',
       subtitle: item.title,
       video: item.src,
-      detail: '海外 Merge 游戏投放素材 · 创意构思 / AI 生成 / 剪辑包装',
+      detail: item.detail || '海外 Merge 游戏投放素材 · 创意构思 / AI 生成 / 剪辑包装',
       meta: [
         { label: 'ROLE', value: item.role },
         { label: 'TOOLS', value: item.tools },
@@ -179,7 +194,6 @@ function GameOrbit({ items, onPreview }) {
       onPointerCancel={endDrag}
       onWheel={(event) => setRotation((value) => value - event.deltaY * 0.035)}
       aria-label="可拖动浏览的游戏买量视频"
-      data-reveal
     >
       <div className="game-orbit-stage">
         {items.map((item, index) => {
@@ -230,6 +244,7 @@ function App() {
   const [videoReady, setVideoReady] = useState(false)
   const [activePreview, setActivePreview] = useState(null)
   const [activeSection, setActiveSection] = useState('top')
+  const [gameGroup, setGameGroup] = useState('merge')
 
   useEffect(() => {
     const items = document.querySelectorAll('[data-reveal]')
@@ -366,7 +381,7 @@ function App() {
             </figure>
             <div className="about-content" data-reveal>
               <h2>视觉 × AI<br /><i>从创意到成片</i></h2>
-              <p className="about-lead">数字媒体艺术背景，具备从脚本构思、分镜设计、AI 视觉资产生成，到剪辑包装的完整内容生产能力。关注创意表达，也关心平台节奏与商业结果。</p>
+              <p className="about-lead">数字媒体艺术本科在读，具备海外 SLG、Merge 游戏买量广告及商业 AI 漫剧制作经验，累计参与制作 70+ 条游戏广告素材。可独立完成分镜设计、AI 视觉生成、后期剪辑及素材迭代。</p>
               <div className="about-contact">
                 <a href="tel:17739450561"><span>PHONE</span><strong>177 3945 0561</strong></a>
                 <a href="mailto:2949026597@qq.com"><span>EMAIL</span><strong>2949026597@qq.com</strong></a>
@@ -378,18 +393,18 @@ function App() {
           <div className="about-details">
             <div className="experience-list" data-reveal>
               <span className="detail-label">EXPERIENCE / 实习经历</span>
-              <article><time>2026.05—08</time><div><h3>触宝科技 · AIGC 实习生</h3><p>参与海外 Merge 游戏广告与 AI 漫剧制作，累计参与 50+ 条买量广告素材。</p></div></article>
-              <article><time>2026.03—05</time><div><h3>深圳裕达通途投资有限公司 · AI 编导实习生</h3><p>围绕 TikTok 短视频完成选题、脚本、画面生成、剪辑包装与发布。</p></div></article>
-              <article><time>2025.06—08</time><div><h3>周口市云帆电子商务有限公司 · 直播中控实习生</h3><p>参与 10+ 场电商直播，产出 60+ 条直播切片，单条最高播放量 50 万+。</p></div></article>
+              <article><time>2026.10—11</time><div><h3>FunPlus · 游戏买量视频实习生（AI 方向）</h3><p>为《{foundationName}》参与创意优化、分镜设计、AI 视频制作及风格迭代，累计完成 20 条买量素材。</p></div></article>
+              <article><time>2026.05—08</time><div><h3>触宝科技 · AIGC 实习生</h3><p>参与海外 Merge 游戏广告脚本、分镜、生成及剪辑交付，累计参与 50+ 条买量素材，并参与腾讯视频及红果上线的 AI 漫剧。</p></div></article>
+              <article><time>2025.06—08</time><div><h3>周口市云帆电子商务有限公司 · 直播中控实习生</h3><p>参与 10+ 场电商直播，协助现场执行与数据复盘。产出 60+ 条直播切片，单条最高播放量超 50 万次。</p></div></article>
             </div>
             <div className="about-side" data-reveal>
               <span className="detail-label">TOOLS / 核心工具</span>
               <div className="about-tools">
-                {['ChatGPT', 'Codex', 'Gemini', 'Midjourney', 'Seedance', '可灵', 'Premiere Pro', 'After Effects', 'C4D', '剪映'].map(tool => <span key={tool}>{tool}</span>)}
+                {['ChatGPT', 'Codex', 'Claude Code', 'Gemini', 'Midjourney', 'Seedream', 'Seedance 2.0 / 2.5', 'Oiioii', 'LibTV', 'Updream', 'Premiere Pro', 'After Effects', '剪映'].map(tool => <span key={tool}>{tool}</span>)}
               </div>
               <div className="about-stats">
-                <div><strong>50<sup>+</sup></strong><span>游戏买量素材</span></div>
-                <div><strong>02</strong><span>商业化 AI 漫剧</span></div>
+                <div><strong>70<sup>+</sup></strong><span>累计参与游戏广告素材</span></div>
+                <div><strong>04</strong><span>已上线 AI 漫剧</span></div>
                 <div><strong>01</strong><span>全国一等奖</span></div>
               </div>
             </div>
@@ -409,13 +424,19 @@ function App() {
               <span>GAME PERFORMANCE CREATIVE</span>
               <h2>游戏买量</h2>
               <div className="game-title-list">
-                <span>Shine On, Bella: Merge &amp; Love</span>
-                <span>Pretty Boutique: Merge &amp; Love</span>
+                <button type="button" aria-pressed={gameGroup === 'merge'} onClick={() => setGameGroup('merge')}>Merge 游戏广告</button>
+                <button type="button" aria-pressed={gameGroup === 'foundation'} onClick={() => setGameGroup('foundation')}>{foundationName}</button>
               </div>
             </div>
-            <p>围绕海外 Merge 类游戏核心卖点，以强情节开场、玩法展示和节奏化包装提升素材的信息效率与观看吸引力。</p>
+            {gameGroup === 'merge' ? (
+              <p>《Shine On, Bella: Merge &amp; Love》与《Pretty Boutique: Merge &amp; Love》的海外买量素材，覆盖剧情开场、玩法展示与卖点包装。</p>
+            ) : (
+              <p>FunPlus 海外 SLG 项目。参与分镜设计、AI 视频制作、后期剪辑与素材风格迭代，本组展示 7 条广告。</p>
+            )}
           </div>
-          <GameOrbit items={gameVideos} onPreview={setActivePreview} />
+          <div data-reveal>
+            <GameOrbit key={gameGroup} items={gameGroup === 'merge' ? gameVideos : foundationVideos} onPreview={setActivePreview} />
+          </div>
         </div>
 
       </section>
@@ -431,7 +452,7 @@ function App() {
               <span>AI COMIC SERIES</span>
               <h2>AI 漫剧</h2>
             </div>
-            <p>参与角色与场景视觉资产生成、镜头调整和成片剪辑。两部作品均已完成商业化上线。</p>
+            <p>参与角色与场景视觉资产生成、镜头调整和成片剪辑。《炼气 3000 层》《大夏镇妖录：黑猪传》已在腾讯视频上线，《人生巅峰全靠捡》《绝世强龙》已在红果上线。</p>
           </div>
           <div className="comic-project-grid">
             {comicProjects.map((project) => (
@@ -464,7 +485,7 @@ function App() {
       <section className="award-work section shell" id="work">
         <header className="section-head" data-reveal>
           <span>04 / AWARD WORK</span>
-          <p>中国好创意人工智能生成视频类全国总决赛一等奖作品。</p>
+          <p>中国好创意「非遗出海·智创未来」人工智能生成专项大赛，人工智能生成视频类全国总决赛一等奖。</p>
         </header>
         <div className="award-heading" data-reveal>
           <div>
