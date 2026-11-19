@@ -3,6 +3,8 @@ import portrait from '../assets/portrait-color-web.jpg'
 import brandImage from '../assets/project-brand.png'
 import comicLianqi from '../assets/comic-lianqi-web.jpg'
 import comicDaxia from '../assets/comic-daxia-web.jpg'
+import comicLifePeak from '../assets/comic-life-peak.jpg'
+import comicDragon from '../assets/comic-peerless-dragon.jpg'
 import awardPoster from '../assets/award-xingshi-poster.jpg'
 import TrueFocus from './components/TrueFocus/TrueFocus'
 
@@ -88,6 +90,22 @@ const comicProjects = [
   },
   {
     no: '03',
+    title: '人生巅峰全靠捡',
+    subtitle: '第 16 集',
+    badge: '红果上线',
+    image: comicLifePeak,
+    video: publicAsset('videos/comic/life-peak-episode-16.mp4'),
+  },
+  {
+    no: '04',
+    title: '绝世强龙',
+    subtitle: '剧集预览',
+    badge: '红果上线',
+    image: comicDragon,
+    video: publicAsset('videos/comic/peerless-dragon.mp4'),
+  },
+  {
+    no: '05',
     title: 'Marry My Daddy',
     subtitle: 'Vibe Reels 上架 · 海外短剧',
     badge: 'VIBE REELS',
