@@ -382,6 +382,7 @@ function App() {
     <main>
       <section className="hero" id="top">
         <div className="cover-streaks" aria-hidden="true" />
+        <div className="cover-glass" aria-hidden="true" />
         <CoverGrain />
         <nav className="nav shell">
           <button className="monogram" onClick={() => go('#top')} aria-label="回到顶部">
