@@ -1,6 +1,5 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react'
 import portrait from '../assets/portrait-color-web.jpg'
-import brandImage from '../assets/project-brand.png'
 import comicLianqi from '../assets/comic-lianqi-web.jpg'
 import comicDaxia from '../assets/comic-daxia-web.jpg'
 import comicLifePeak from '../assets/comic-life-peak.jpg'
@@ -41,6 +40,7 @@ const gameNames = [
 
 const gameVideos = Array.from({ length: gameNames.length }, (_, index) => ({
   src: publicAsset(`videos/game/${index + 1}.mp4`),
+  poster: publicAsset(`posters/game/${index + 1}.jpg`),
   no: String(index + 1).padStart(2, '0'),
   title: `Creative ${String(index + 1).padStart(2, '0')}`,
   gameName: gameNames[index],
@@ -54,6 +54,7 @@ const foundationVideos = Array.from({ length: 7 }, (_, index) => {
   const no = String(index + 1).padStart(2, '0')
   return {
     src: publicAsset(`videos/game/foundation/${no}.mp4`),
+    poster: publicAsset(`posters/game/foundation/${no}.jpg`),
     no,
     title: `Creative ${no}`,
     gameName: foundationName,
@@ -187,14 +188,12 @@ function OrbitVideo({ item, active }) {
     <video
       ref={videoRef}
       src={item.src}
+      poster={item.poster}
       muted
       loop
       playsInline
       preload={active ? 'auto' : 'metadata'}
       draggable="false"
-      onLoadedMetadata={(event) => {
-        if (!active && event.currentTarget.duration > 0.12) event.currentTarget.currentTime = 0.12
-      }}
     />
   )
 }
@@ -364,35 +363,6 @@ function App() {
   return (
     <main>
       <section className="hero" id="top">
-        <div className="hero-media" aria-hidden="true">
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            poster={brandImage}
-            onCanPlay={() => setVideoReady(true)}
-            className={videoReady ? 'is-ready' : ''}
-          >
-            <source src={publicAsset('hero-video.mp4')} type="video/mp4" />
-          </video>
-          <div className="hero-grid" />
-          <div className="hero-shade" />
-        </div>
-        <div className="shape-blur-layer" aria-hidden="true">
-          <Suspense fallback={null}>
-            <ShapeBlur
-              variation={0}
-              pixelRatioProp={typeof window !== 'undefined' ? window.devicePixelRatio || 1 : 1}
-              shapeSize={0.5}
-              roundness={0.5}
-              borderSize={0.05}
-              circleSize={0.5}
-              circleEdge={0.7}
-            />
-          </Suspense>
-        </div>
-
         <nav className="nav shell">
           <button className="monogram" onClick={() => go('#top')} aria-label="回到顶部">
             <span>SONG</span> JIALE
@@ -405,7 +375,7 @@ function App() {
             <button className={activeSection === 'shorts' ? 'is-active' : ''} onClick={() => go('#shorts')}>个人短片</button>
           </div>
           <a className="nav-contact" href="mailto:2949026597@qq.com">
-            CONTACT <Arrow diagonal />
+            联系我 <Arrow diagonal />
           </a>
           <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="打开菜单">
             <span /><span />
@@ -414,36 +384,64 @@ function App() {
 
         <div className="hero-content shell">
           <div className="hero-copy">
-            <div className="eyebrow"><span /> Portfolio · 2025 — 2026</div>
-            <h1 className="hero-focus-title">
+            <p className="hero-name">宋家乐 <span>作品集 2025–2026</span></p>
+            <h1 className="hero-focus-title" aria-label="Song Jiale">
               <TrueFocus
-                sentence="SONG JIALE|VISUAL × AI"
+                sentence="Song|Jiale"
                 separator="|"
                 manualMode={false}
-                blurAmount={0.8}
-                borderColor="#35e5df"
-                glowColor="rgba(53, 229, 223, 0.45)"
-                animationDuration={2}
-                pauseBetweenAnimations={1}
+                blurAmount={0.3}
+                borderColor="#dda878"
+                glowColor="transparent"
+                animationDuration={0.6}
+                pauseBetweenAnimations={2}
               />
             </h1>
+            <p className="hero-specialty">海外游戏广告 <span>／</span> AI 影像创作</p>
             <div className="hero-actions">
               <button className="hero-cta" onClick={() => go('#videos')}>查看精选作品 <Arrow /></button>
               <a className="hero-resume" href={`${import.meta.env.BASE_URL}files/song-jiale-resume.pdf`} download="宋家乐-视觉AI设计师-简历.pdf">下载简历 ↓</a>
             </div>
           </div>
+          <figure className="hero-feature">
+            <div className="hero-feature-frame">
+              <div className="hero-media" aria-hidden="true">
+                <img src={awardPoster} alt="" fetchPriority="high" />
+                <video
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  poster={awardPoster}
+                  onCanPlay={() => setVideoReady(true)}
+                  className={videoReady ? 'is-ready' : ''}
+                >
+                  <source src={publicAsset('hero-video.mp4')} type="video/mp4" />
+                </video>
+              </div>
+              <div className="shape-blur-layer" aria-hidden="true">
+                <Suspense fallback={null}>
+                  <ShapeBlur variation={0} pixelRatioProp={window.devicePixelRatio || 1} shapeSize={0.5} roundness={0.5} borderSize={0.05} circleSize={0.5} circleEdge={0.7} />
+                </Suspense>
+              </div>
+            </div>
+            <figcaption>
+              <span>《醒狮入梦》<small>中国好创意 · 全国总决赛一等奖</small></span>
+              <button type="button" onClick={() => go('#work')} aria-label="查看醒狮入梦获奖作品"><Arrow diagonal /></button>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
       <section className="about about-native" id="about">
         <div className="shell">
           <header className="section-head" data-reveal>
-            <span>01 / ABOUT</span>
+            <span>关于我</span>
           </header>
           <div className="about-native-grid">
             <figure className="about-portrait" data-reveal>
               <img src={portrait} alt="宋家乐个人肖像" />
-              <figcaption><span>SONG JIALE</span><span>2004 — NOW</span></figcaption>
+              <figcaption><span>宋家乐 / SONG JIALE</span></figcaption>
             </figure>
             <div className="about-content" data-reveal>
               <h2>视觉 × AI<br /><i>从创意到成片</i></h2>
@@ -480,8 +478,8 @@ function App() {
 
       <section className="video-showcase section shell" id="videos" aria-labelledby="foundation-heading">
         <header className="section-head" data-reveal>
-          <span>02 / MOTION WORKS</span>
-          <p>以高密度叙事、玩法展示和卖点包装，回应海外游戏投放场景。</p>
+          <span>游戏买量 / GAME ADVERTISING</span>
+          <p>从叙事切入、玩法展示到卖点与素材版本迭代。</p>
         </header>
 
         <div className="video-category game-category">
@@ -490,7 +488,7 @@ function App() {
               <span>FUNPLUS · SLG 游戏广告</span>
               <h2 id="foundation-heading" className="foundation-title">{foundationName}</h2>
             </div>
-            <p>参与分镜设计、AI 视频制作、后期剪辑与素材风格迭代。本项目展示 7 条海外买量广告。</p>
+            <p>负责分镜设计、AI 视频制作、剪辑与风格迭代。实习期间完成 20 条买量素材，本站精选其中 7 条。</p>
           </div>
           <div data-reveal>
             <GameOrbit items={foundationVideos} onPreview={setActivePreview} />

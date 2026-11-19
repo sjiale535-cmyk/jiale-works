@@ -1,0 +1,162 @@
+:root {
+  color: #eee8de;
+  --bg: #121211;
+  --panel: #1b1a18;
+  --line: rgba(227, 213, 194, .2);
+  --muted: #bdb2a3;
+  --accent: #dda878;
+  --display-font: Georgia, 'Songti SC', 'SimSun', serif;
+}
+
+button:focus-visible, a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 5px;
+}
+
+.nav {
+  width: 100%;
+  height: 76px;
+  padding-inline: max(calc((100% - 1440px) / 2), clamp(18px, 4vw, 60px));
+  background: rgba(18, 18, 17, .93);
+  border-color: var(--line);
+}
+.nav-links { gap: clamp(16px, 2.5vw, 39px); }
+.nav-links button::after { bottom: -27px; }
+.nav-contact:hover { background: none; color: var(--accent); }
+
+.hero {
+  height: auto;
+  min-height: min(820px, 100svh);
+  background: radial-gradient(ellipse at 74% 36%, #242019, transparent 58%), var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.hero-content {
+  display: grid;
+  grid-template-columns: minmax(0, .78fr) minmax(0, 1.22fr);
+  align-items: center;
+  gap: clamp(30px, 6vw, 106px);
+  min-height: inherit;
+  padding: clamp(110px, 13vw, 154px) 0 clamp(48px, 8vw, 100px);
+}
+.hero-copy { width: 100%; }
+.hero-name {
+  margin: 0 0 25px;
+  color: #eee8de;
+  font-size: 16px;
+  letter-spacing: .14em;
+}
+.hero-name span { margin-left: 12px; color: var(--muted); font-size: 11px; letter-spacing: .08em; }
+.hero .hero-focus-title {
+  margin: 0;
+  font-family: var(--display-font);
+  font-size: clamp(76px, 9.2vw, 145px);
+  font-weight: 400;
+  font-stretch: normal;
+  line-height: .78;
+  letter-spacing: -.085em;
+}
+.hero-focus-title .focus-container { gap: .11em; }
+.hero-focus-title .focus-word:first-child { font-weight: 400; }
+.hero-focus-title .focus-word:nth-child(2) {
+  color: var(--accent);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -.085em;
+  text-shadow: none;
+}
+.hero-focus-title .corner { width: 10px; height: 10px; border-width: 1px; opacity: .6; }
+.hero-specialty { margin: 32px 0 24px; color: var(--muted); font-size: 15px; line-height: 1.7; }
+.hero-specialty span { color: var(--accent); }
+.hero-cta, .hero-cta:hover { color: #17120e; border-color: var(--accent); }
+.hero-cta:hover { background: #f2caa4; }
+.hero-resume { color: #e2d7c9; }
+.hero-feature { min-width: 0; margin: 0; }
+.hero-feature-frame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1.6;
+  background: #222019;
+  border: 1px solid var(--line);
+}
+.hero-media img, .hero-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.hero-media video { transform: none; filter: saturate(.85) contrast(1.06); }
+.hero-media video.is-ready { opacity: 1; }
+.hero-feature .shape-blur-layer { top: 0; right: 0; width: 100%; height: 100%; opacity: .08; filter: sepia(1); }
+.hero-feature figcaption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 14px;
+  color: #eee8de;
+  font-size: 16px;
+}
+.hero-feature small { display: block; margin-top: 4px; color: var(--muted); font-size: 11px; }
+.hero-feature button {
+  flex: 0 0 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+}
+.hero-feature button:hover { color: var(--accent); border-color: var(--accent); }
+
+.about-native { background: #191816; }
+.about-native::after { content: none; }
+.about-portrait img { filter: saturate(.65); }
+.about-content h2, .video-category-head h2, .ability-heading h2, .award-view-panel h2 {
+  font-family: var(--display-font);
+  font-weight: 500;
+  letter-spacing: -.045em;
+}
+.section-head > span, .video-category-head span, .detail-label { letter-spacing: .085em; }
+.video-showcase, .comic-page, .award-work { background: transparent; }
+.video-category-head p, .about-lead { color: var(--muted); }
+.game-orbit {
+  border: 1px solid var(--line);
+  background: radial-gradient(ellipse at 50% 35%, #312820, #171615 58%, #131312);
+}
+.game-orbit::before { border-color: rgba(221, 168, 120, .18); box-shadow: none; }
+.orbit-card.is-front { border-color: var(--accent); }
+
+.comic-project-grid { column-gap: clamp(12px, 1.7vw, 26px); }
+.comic-project-card { background: transparent; border: 0; }
+.comic-poster { background: #191817; border: 1px solid var(--line); }
+.comic-project-info { border: 0; padding: 14px 0 0; }
+.comic-project-info > div > span { color: var(--accent); letter-spacing: .04em; }
+.comic-project-info h3 { font-weight: 550; }
+.comic-project-info button { border: 0; border-top: 1px solid var(--line); border-radius: 0; padding-inline: 0; }
+.comic-project-info button i { background: transparent; color: var(--accent); }
+.comic-project-info button:hover { color: var(--accent); background: transparent; }
+.comic-project-info button:hover i { background: transparent; color: var(--accent); }
+.short-film-grid { max-width: 1080px; }
+
+.award-showcase { background: #201d19; border-color: var(--line); }
+.award-view-panel button { border-radius: 0; }
+.award-view-panel button i { border-radius: 0; color: #17120e; }
+.ability-grid article:nth-child(n) { background: transparent; border-width: 1px 0 0; padding-inline: 0; }
+.ability-grid { column-gap: clamp(20px, 4vw, 60px); }
+
+.contact { background: #e2d6c6; color: #171513; min-height: 54svh; }
+.contact-glow { display: none; }
+.contact h2 { font-family: var(--display-font); font-weight: 500; }
+.contact .big-mail { border-color: rgba(23, 21, 19, .3); }
+.big-mail > i { color: #eee8de; background: #201b16; }
+
+@media (max-width: 720px) {
+  .nav { height: 70px; }
+  .nav-links { top: 70px; background: var(--bg); border-color: var(--line); }
+  .nav-links button::after { bottom: -4px; }
+  .hero-content { grid-template-columns: 1fr; gap: 34px; padding: 116px 0 36px; }
+  .hero .hero-focus-title { font-size: clamp(58px, 15vw, 104px); }
+  .hero-feature-frame { aspect-ratio: 16 / 10; }
+  .hero-specialty { margin: 23px 0 17px; }
+  .contact-inner { padding-top: 60px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media video, .hero-feature .shape-blur-layer, .hero-focus-title .focus-frame { visibility: hidden; }
+  .hero-focus-title .focus-word { filter: none !important; }
+}
