@@ -6,6 +6,9 @@ import comicDaxia from '../assets/comic-daxia-web.jpg'
 import comicLifePeak from '../assets/comic-life-peak.jpg'
 import comicDragon from '../assets/comic-peerless-dragon.jpg'
 import awardPoster from '../assets/award-xingshi-poster.jpg'
+import magistratePoster from '../assets/short-substitute-magistrate.jpg'
+import paperWifePoster from '../assets/short-paper-wife.png'
+import weightlessPoster from '../assets/short-one-minute-weightless.png'
 import TrueFocus from './components/TrueFocus/TrueFocus'
 
 const ShapeBlur = lazy(() => import('./components/ShapeBlur/ShapeBlur'))
@@ -118,6 +121,18 @@ const comicProjects = [
   },
 ]
 
+const shortFilms = [
+  { title: '替身县令', image: magistratePoster, file: 'substitute-magistrate', subtitle: '3 分 48 秒' },
+  { title: '纸妻', image: paperWifePoster, file: 'paper-wife', subtitle: '3 分 55 秒' },
+  { title: '失重一分钟', image: weightlessPoster, file: 'one-minute-weightless', subtitle: '5 分 18 秒' },
+].map(({ title, image, file, subtitle }) => ({
+  title,
+  image,
+  subtitle,
+  badge: '个人创作',
+  video: publicAsset(`videos/shorts/${file}.mp4`),
+}))
+
 const awardProject = {
   title: '醒狮入梦',
   subtitle: '中国好创意 · 人工智能生成视频类',
@@ -128,6 +143,34 @@ const awardProject = {
     { label: 'ROLE', value: '独立创作 · 全流程完成' },
     { label: 'AWARD', value: '中国好创意全国总决赛一等奖' },
   ],
+}
+
+function FilmCards({ projects, onPreview, className = '' }) {
+  return (
+    <div className={`comic-project-grid ${className}`}>
+      {projects.map((project) => (
+        <article className="comic-project-card" key={project.title} data-reveal>
+          <div className="comic-poster">
+            {project.image ? (
+              <img src={project.image} alt={`《${project.title}》海报`} loading="lazy" />
+            ) : (
+              <video src={project.video} muted loop autoPlay playsInline preload="metadata" aria-label={`${project.title}视频画面`} />
+            )}
+          </div>
+          <div className="comic-project-info">
+            <div>
+              <span>{project.badge}</span>
+              <h3>{project.title}</h3>
+              <p>{project.subtitle}</p>
+            </div>
+            <button type="button" onClick={() => onPreview(project)}>
+              点击预览 <i><Arrow diagonal /></i>
+            </button>
+          </div>
+        </article>
+      ))}
+    </div>
+  )
 }
 
 function OrbitVideo({ item, active }) {
@@ -287,7 +330,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    const sectionIds = ['top', 'about', 'videos', 'merge-ads', 'comic']
+    const sectionIds = ['top', 'about', 'videos', 'merge-ads', 'comic', 'shorts']
     const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean)
     const observer = new IntersectionObserver(
       entries => {
@@ -359,6 +402,7 @@ function App() {
             <button className={activeSection === 'about' ? 'is-active' : ''} onClick={() => go('#about')}>关于</button>
             <button className={['videos', 'merge-ads'].includes(activeSection) ? 'is-active' : ''} onClick={() => go('#videos')}>游戏广告</button>
             <button className={activeSection === 'comic' ? 'is-active' : ''} onClick={() => go('#comic')}>AI漫剧</button>
+            <button className={activeSection === 'shorts' ? 'is-active' : ''} onClick={() => go('#shorts')}>个人短片</button>
           </div>
           <a className="nav-contact" href="mailto:2949026597@qq.com">
             CONTACT <Arrow diagonal />
@@ -477,30 +521,16 @@ function App() {
             </div>
             <p>项目涵盖角色与场景视觉资产生成、镜头调整和成片剪辑。点击卡片下方的按钮即可观看剧集片段。</p>
           </div>
-          <div className="comic-project-grid">
-            {comicProjects.map((project) => (
-              <article className="comic-project-card" key={project.no} data-reveal>
-                <div className="comic-poster">
-                  {project.image ? (
-                    <img src={project.image} alt={`${project.title}：${project.subtitle}海报`} />
-                  ) : (
-                    <video src={project.video} muted loop autoPlay playsInline preload="metadata" aria-label={`${project.title}视频画面`} />
-                  )}
-                </div>
-                <div className="comic-project-info">
-                  <div>
-                    <span>{project.badge}</span>
-                    <h3>{project.title}</h3>
-                    <p>{project.subtitle}</p>
-                  </div>
-                  <button type="button" onClick={() => setActivePreview(project)}>
-                    点击预览 <i><Arrow diagonal /></i>
-                  </button>
-                </div>
-              </article>
-            ))}
-          </div>
+          <FilmCards projects={comicProjects} onPreview={setActivePreview} />
         </div>
+      </section>
+
+      <section className="comic-page section shell" id="shorts" aria-labelledby="short-films-title">
+        <header className="video-category-head" data-reveal>
+          <h2 id="short-films-title">个人 AI 短片</h2>
+          <p>三部由我独立制作的 AI 短片，可点击海报下方的按钮观看完整影片。</p>
+        </header>
+        <FilmCards projects={shortFilms} onPreview={setActivePreview} className="short-film-grid" />
       </section>
 
       <section className="award-work section shell" id="work">

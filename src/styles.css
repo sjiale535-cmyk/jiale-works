@@ -500,6 +500,13 @@ svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
   .ability-grid article:nth-child(n) { padding: 14px; }
 }
 
+.short-film-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 980px; margin-inline: 0; }
+.short-film-grid .comic-poster { aspect-ratio: 3 / 4; }
+
+@media (max-width: 720px) {
+  .short-film-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }
