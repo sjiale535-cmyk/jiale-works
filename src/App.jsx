@@ -8,7 +8,6 @@ import awardPoster from '../assets/award-xingshi-poster.jpg'
 import magistratePoster from '../assets/short-substitute-magistrate.jpg'
 import paperWifePoster from '../assets/short-paper-wife.png'
 import weightlessPoster from '../assets/short-one-minute-weightless.png'
-import TrueFocus from './components/TrueFocus/TrueFocus'
 
 const publicAsset = (path) => `${import.meta.env.BASE_URL}${path.replace(/^\/+/, '')}`
 
@@ -171,6 +170,27 @@ function FilmCards({ projects, onPreview, className = '' }) {
       ))}
     </div>
   )
+}
+
+function CoverGrain() {
+  const layer = useRef(null)
+
+  useEffect(() => {
+    const tile = document.createElement('canvas')
+    tile.width = tile.height = 192
+    const context = tile.getContext('2d')
+    if (!context) return
+    const noise = context.createImageData(tile.width, tile.height)
+    for (let pixel = 0; pixel < noise.data.length; pixel += 4) {
+      const shade = Math.random() < 0.5 ? 0 : 255
+      noise.data[pixel] = noise.data[pixel + 1] = noise.data[pixel + 2] = shade
+      noise.data[pixel + 3] = Math.random() * 64
+    }
+    context.putImageData(noise, 0, 0)
+    layer.current.style.backgroundImage = `url(${tile.toDataURL()})`
+  }, [])
+
+  return <div className="cover-grain" ref={layer} aria-hidden="true" />
 }
 
 function OrbitVideo({ item, active }) {
@@ -361,6 +381,8 @@ function App() {
   return (
     <main>
       <section className="hero" id="top">
+        <div className="cover-streaks" aria-hidden="true" />
+        <CoverGrain />
         <nav className="nav shell">
           <button className="monogram" onClick={() => go('#top')} aria-label="回到顶部">
             <span>SONG</span> JIALE
@@ -381,21 +403,23 @@ function App() {
         </nav>
 
         <div className="hero-content shell">
-          <div className="hero-copy">
-            <p className="hero-name">宋家乐 <span>作品集 2025–2026</span></p>
-            <h1 className="hero-focus-title" aria-label="Song Jiale">
-              <TrueFocus
-                sentence="Song|Jiale"
-                separator="|"
-                manualMode={false}
-                blurAmount={0.3}
-                borderColor="#dda878"
-                glowColor="transparent"
-                animationDuration={0.6}
-                pauseBetweenAnimations={2}
-              />
-            </h1>
-            <p className="hero-specialty">海外游戏广告 <span>／</span> AI 影像创作</p>
+          <div className="cover-main">
+            <h1 className="cover-title"><span>VISUAL</span><span>DESIGN &amp; AI</span></h1>
+            <div className="cover-author">
+              <strong>宋家乐</strong>
+              <span>SONG JIALE</span>
+              <div className="cover-mark" aria-hidden="true"><i /><i /><i /></div>
+            </div>
+          </div>
+          <div className="cover-edition">
+            <strong>视觉设计</strong>
+            <strong>作品集</strong>
+            <span>PORTFOLIO<br />2025—2026</span>
+          </div>
+          <div className="cover-disciplines">
+            <span>海外游戏广告</span>
+            <span>商业 AI 漫剧</span>
+            <span>个人 AI 短片</span>
           </div>
         </div>
       </section>

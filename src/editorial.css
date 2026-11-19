@@ -1,11 +1,12 @@
 :root {
-  color: #eee8de;
-  --bg: #121211;
-  --panel: #1b1a18;
-  --line: rgba(227, 213, 194, .2);
-  --muted: #bdb2a3;
-  --accent: #dda878;
-  --display-font: Georgia, 'Songti SC', 'SimSun', serif;
+  color: #efefed;
+  background: #111;
+  --bg: #111;
+  --panel: #1b1b1b;
+  --line: rgba(240, 240, 238, .22);
+  --muted: #b5b5b3;
+  --accent: #e2e2df;
+  --display-font: 'Arial', 'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 
 button:focus-visible, a:focus-visible {
@@ -17,7 +18,7 @@ button:focus-visible, a:focus-visible {
   width: 100%;
   height: 76px;
   padding-inline: max(calc((100% - 1440px) / 2), clamp(18px, 4vw, 60px));
-  background: rgba(18, 18, 17, .93);
+  background: rgba(16, 16, 16, .91);
   border-color: var(--line);
 }
 .nav-links { gap: clamp(16px, 2.5vw, 39px); }
@@ -26,52 +27,68 @@ button:focus-visible, a:focus-visible {
 
 .hero {
   height: auto;
-  min-height: min(820px, 100svh);
-  background: radial-gradient(ellipse at 50% 44%, #242019, transparent 65%), var(--bg);
+  min-height: min(880px, 100svh);
+  isolation: isolate;
+  background: radial-gradient(ellipse at 64% 38%, #575757, #303030 52%, #161616 100%);
   border-bottom: 1px solid var(--line);
 }
+.cover-streaks, .cover-grain { position: absolute; inset: 0; pointer-events: none; }
+.cover-streaks {
+  transform: scale(1.12);
+  background:
+    radial-gradient(ellipse 48% 9% at 75% 62%, #090909 8%, transparent 99%),
+    radial-gradient(ellipse 68% 10% at 18% 57%, #121212 15%, transparent 93%),
+    radial-gradient(ellipse 29% 22% at 62% 58%, #101010 15%, transparent 100%),
+    radial-gradient(ellipse 75% 5% at 48% 71%, #7778, transparent 100%),
+    radial-gradient(ellipse 88% 6% at 65% 78%, #161616, transparent 100%),
+    radial-gradient(ellipse 31% 10% at 61% 85%, #121212, transparent 100%);
+  filter: blur(13px);
+}
+.cover-grain { opacity: .52; }
 .hero-content {
   display: grid;
-  place-items: center;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: 1fr auto auto;
+  row-gap: clamp(24px, 5vh, 58px);
   min-height: inherit;
-  padding: clamp(110px, 13vw, 154px) 0 clamp(48px, 8vw, 100px);
+  padding: clamp(112px, 16vh, 158px) 0 clamp(30px, 5vh, 56px);
 }
-.hero-copy { width: 100%; text-align: center; }
-.hero-name {
-  margin: 0 0 25px;
-  color: #eee8de;
-  font-size: 16px;
-  letter-spacing: .14em;
-}
-.hero-name span { margin-left: 12px; color: var(--muted); font-size: 11px; letter-spacing: .08em; }
-.hero .hero-focus-title {
+.cover-main { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 24px; align-items: start; }
+.hero .cover-title {
   margin: 0;
   font-family: var(--display-font);
-  font-size: clamp(52px, 12vw, 160px);
-  font-weight: 400;
+  font-size: clamp(56px, 10.8vw, 164px);
+  font-weight: 800;
+  line-height: .89;
+  letter-spacing: -.08em;
   font-stretch: normal;
-  line-height: .78;
-  letter-spacing: -.085em;
 }
-.hero-focus-title .focus-container { flex-flow: row nowrap; justify-content: center; align-items: baseline; gap: .22em; margin-inline: auto; }
-.hero-focus-title .focus-word:first-child { font-weight: 400; }
-.hero-focus-title .focus-word:nth-child(2) {
-  color: var(--accent);
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: -.085em;
-  text-shadow: none;
+.cover-title span + span { margin-top: .13em; }
+.cover-author { min-width: 0; display: grid; justify-items: end; gap: 7px; text-align: right; }
+.cover-author strong { font-size: clamp(25px, 3vw, 52px); line-height: 1.12; }
+.cover-author > span, .cover-edition > span { color: #d5d5d2; font-size: clamp(11px, 1.2vw, 16px); letter-spacing: .11em; line-height: 1.5; }
+.cover-mark { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px; margin-top: clamp(13px, 2vw, 32px); }
+.cover-mark i { display: block; width: clamp(14px, 2.1vw, 34px); aspect-ratio: 1; border-radius: 50%; background: #e5e5e2; }
+.cover-mark i:last-child { grid-column: 2; }
+.cover-edition { display: grid; grid-template-columns: 1fr 1fr auto; align-items: end; gap: 18px; }
+.cover-edition strong { font-size: clamp(21px, 3.7vw, 55px); line-height: 1.1; letter-spacing: -.055em; }
+.cover-edition > span { text-align: right; }
+.cover-disciplines {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px clamp(21px, 5vw, 76px);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  font-size: 13px;
+  letter-spacing: .06em;
 }
-.hero-focus-title .corner { width: 10px; height: 10px; border-width: 1px; opacity: .6; }
-.hero-specialty { margin: 32px 0 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
-.hero-specialty span { color: var(--accent); }
 
-.about-native { background: #191816; }
+.about-native { background: #191919; }
 .about-native::after { content: none; }
-.about-portrait img { filter: saturate(.65); }
+.about-portrait img { filter: none; }
 .about-content h2, .video-category-head h2, .ability-heading h2, .award-view-panel h2 {
   font-family: var(--display-font);
-  font-weight: 500;
+  font-weight: 750;
   letter-spacing: -.045em;
 }
 .section-head > span, .video-category-head span, .detail-label { letter-spacing: .085em; }
@@ -79,14 +96,14 @@ button:focus-visible, a:focus-visible {
 .video-category-head p, .about-lead { color: var(--muted); }
 .game-orbit {
   border: 1px solid var(--line);
-  background: radial-gradient(ellipse at 50% 35%, #312820, #171615 58%, #131312);
+  background: radial-gradient(ellipse at 50% 35%, #303030, #181818 58%, #131313);
 }
-.game-orbit::before { border-color: rgba(221, 168, 120, .18); box-shadow: none; }
+.game-orbit::before { border-color: var(--line); box-shadow: none; }
 .orbit-card.is-front { border-color: var(--accent); }
 
 .comic-project-grid { column-gap: clamp(12px, 1.7vw, 26px); }
 .comic-project-card { background: transparent; border: 0; }
-.comic-poster { background: #191817; border: 1px solid var(--line); }
+.comic-poster { background: #191919; border: 1px solid var(--line); }
 .comic-project-info { border: 0; padding: 14px 0 0; }
 .comic-project-info > div > span { color: var(--accent); letter-spacing: .04em; }
 .comic-project-info h3 { font-weight: 550; }
@@ -96,17 +113,17 @@ button:focus-visible, a:focus-visible {
 .comic-project-info button:hover i { background: transparent; color: var(--accent); }
 .short-film-grid { max-width: 1080px; }
 
-.award-showcase { background: #201d19; border-color: var(--line); }
+.award-showcase { background: #202020; border-color: var(--line); }
 .award-view-panel button { border-radius: 0; }
-.award-view-panel button i { border-radius: 0; color: #17120e; }
+.award-view-panel button i { border-radius: 0; color: #171717; }
 .ability-grid article:nth-child(n) { background: transparent; border-width: 1px 0 0; padding-inline: 0; }
 .ability-grid { column-gap: clamp(20px, 4vw, 60px); }
 
-.contact { background: #e2d6c6; color: #171513; min-height: 54svh; }
+.contact { background: #e4e4e1; color: #171717; min-height: 54svh; }
 .contact-glow { display: none; }
-.contact h2 { font-family: var(--display-font); font-weight: 500; }
-.contact .big-mail { border-color: rgba(23, 21, 19, .3); }
-.big-mail > i { color: #eee8de; background: #201b16; }
+.contact h2 { font-family: var(--display-font); font-weight: 750; }
+.contact .big-mail { border-color: rgba(23, 23, 23, .3); }
+.big-mail > i { color: #eee; background: #202020; }
 
 @media (max-width: 720px) {
   .nav { height: 70px; }
@@ -114,12 +131,9 @@ button:focus-visible, a:focus-visible {
   .nav-links button::after { bottom: -4px; }
   .hero { min-height: 70svh; }
   .hero-content { padding: 98px 0 48px; }
-  .hero .hero-focus-title { font-size: clamp(46px, 13vw, 92px); }
-  .hero-specialty { margin-top: 24px; }
+  .cover-main { grid-template-columns: 1fr; gap: 20px; }
+  .hero .cover-title { font-size: clamp(42px, 11.6vw, 84px); }
+  .cover-author { grid-template-columns: auto 1fr auto; justify-items: start; align-items: center; gap: 10px; text-align: left; }
+  .cover-mark { margin-top: 0; justify-self: end; }
   .contact-inner { padding-top: 60px; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-focus-title .focus-frame { visibility: hidden; }
-  .hero-focus-title .focus-word { filter: none !important; }
 }
