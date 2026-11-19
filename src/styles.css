@@ -20,7 +20,6 @@ a { color: inherit; text-decoration: none; }
 svg { width: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; }
 .shell { width: var(--shell); margin-inline: auto; }
 .section { padding-block: 108px; }
-section, footer { scroll-margin-top: 86px; }
 
 [data-reveal] { opacity: 0; transform: translateY(38px); transition: opacity .9s ease, transform .9s cubic-bezier(.2,.75,.25,1); }
 [data-reveal].is-visible { opacity: 1; transform: none; }
@@ -428,6 +427,77 @@ section, footer { scroll-margin-top: 86px; }
 
 @media (max-width: 480px) {
   .comic-project-grid { grid-template-columns: 1fr; max-width: 260px; }
+}
+
+:root { --shell: min(1440px, calc(100% - clamp(36px, 8vw, 120px))); }
+.section, .about-native { padding-block: clamp(56px, 7vw, 100px); }
+.section-head, .about-native .section-head { margin-bottom: clamp(24px, 3vw, 44px); }
+.hero { min-height: 560px; }
+.hero-content { height: 100%; padding: 100px 0 48px; }
+.hero-copy { width: min(100%, 950px); }
+.hero h1 { font-size: clamp(44px, 8.8vw, 128px); line-height: .96; margin: 22px 0 36px; }
+.hero-actions { flex-wrap: wrap; flex-direction: row; align-items: center; gap: 14px 24px; }
+.hero-cta { border: 1px solid var(--accent); padding: 12px 17px; background: var(--accent); color: #071616; font-size: 14px; letter-spacing: 0; }
+.hero-cta:hover { background: #b1fffb; border-color: #b1fffb; }
+.hero-resume { padding: 10px 0; color: #c8d2d0; font-size: 14px; letter-spacing: 0; }
+.about-native-grid { grid-template-columns: minmax(0, .72fr) minmax(0, 1.28fr); align-items: center; gap: clamp(28px, 5vw, 72px); }
+.about-portrait { min-height: 0; height: auto; aspect-ratio: 5 / 6; }
+.about-portrait img { transform: none; object-position: 60% 63%; }
+.about-content { padding: 0; }
+.about-content h2 { font-size: clamp(38px, 5vw, 72px); line-height: 1.07; }
+.about-lead { margin: 22px 0 0; max-width: 43em; }
+.about-contact { margin-top: 26px; }
+.about-details { margin-top: 40px; }
+.video-category-head { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(20px, 5vw, 64px); margin-bottom: 28px; }
+.video-category-head h2, .video-category-head .foundation-title, .comic-category .video-category-head h2, .ability-heading h2 { font-size: clamp(34px, 4.6vw, 66px); line-height: 1.07; letter-spacing: -.04em; }
+.video-category-head .foundation-title { overflow-wrap: anywhere; }
+#merge-ads { padding-top: clamp(42px, 5vw, 72px); }
+.comic-page, .ability { border-top: 1px solid var(--line); }
+.comic-category { max-width: none; }
+.comic-category .video-category-head span { color: var(--accent); }
+.comic-project-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px 16px; max-width: none; }
+.comic-project-card { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--line); }
+.comic-poster { aspect-ratio: 7 / 10; border: 0; }
+.comic-poster::after { content: none; }
+.comic-project-info { display: flex; flex: 1; flex-direction: column; align-items: stretch; justify-content: space-between; gap: 14px; margin: 0; padding: 14px; }
+.comic-project-info h3 { font-size: clamp(16px, 1.65vw, 23px); overflow-wrap: anywhere; }
+.comic-project-info button { justify-content: space-between; border-radius: 4px; }
+.comic-project-info button i { width: 22px; height: 22px; }
+.comic-project-info button svg { width: 14px; }
+.award-showcase { grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); min-height: 0; }
+.award-poster { align-self: center; }
+.award-poster img { height: auto; }
+.award-showcase:hover .award-poster img { transform: none; }
+.award-view-panel { padding: clamp(22px, 4vw, 56px); gap: 12px; }
+.award-view-panel h2 { margin: 0; font-size: clamp(38px, 5vw, 72px); line-height: 1; }
+.award-view-panel .award-result { color: var(--accent); font-size: 17px; }
+.award-view-panel button { margin-top: 8px; }
+.ability-heading { margin-bottom: 26px; }
+.ability-grid { gap: 12px; border: 0; }
+.ability-grid article, .ability-grid article:last-child, .ability-grid article:nth-child(n) { min-height: 0; padding: 22px; border: 1px solid var(--line); background: var(--panel); }
+.ability-grid h3 { margin-bottom: 10px; font-size: 22px; }
+.ability-en { margin: 0 0 9px; }
+.contact { min-height: 68svh; background: #102322; color: #eff1ed; border-top: 1px solid var(--line); }
+.contact-glow { opacity: .13; }
+.contact h2 { margin: auto 0 32px; font-size: clamp(48px, 8vw, 116px); line-height: 1; }
+.big-mail { border-color: var(--line); }
+.big-mail > i { background: var(--accent); color: #091414; }
+
+@media (max-width: 1050px) {
+  .comic-project-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .nav-links { gap: 10px 20px; flex-wrap: wrap; }
+  .hero { min-height: 520px; }
+  .hero h1 { font-size: clamp(34px, 11vw, 68px); }
+  .about-native-grid, .video-category-head, .award-showcase { grid-template-columns: 1fr; }
+  .about-portrait { width: min(100%, 420px); justify-self: center; }
+  .comic-project-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .comic-project-info { padding: 10px; }
+  .award-poster { aspect-ratio: auto; }
+  .ability-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ability-grid article:nth-child(n) { padding: 14px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

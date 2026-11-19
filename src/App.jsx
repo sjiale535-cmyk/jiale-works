@@ -376,7 +376,7 @@ function App() {
                 sentence="SONG JIALE|VISUAL × AI"
                 separator="|"
                 manualMode={false}
-                blurAmount={2.4}
+                blurAmount={0.8}
                 borderColor="#35e5df"
                 glowColor="rgba(53, 229, 223, 0.45)"
                 animationDuration={2}
@@ -384,17 +384,9 @@ function App() {
               />
             </h1>
             <div className="hero-actions">
-              <button className="hero-cta" onClick={() => go('#videos')}>VIEW SELECTED WORK <Arrow /></button>
-              <a className="hero-resume" href={`${import.meta.env.BASE_URL}files/song-jiale-resume.pdf`} download="宋家乐-视觉AI设计师-简历.pdf">DOWNLOAD CV ↓</a>
+              <button className="hero-cta" onClick={() => go('#videos')}>查看精选作品 <Arrow /></button>
+              <a className="hero-resume" href={`${import.meta.env.BASE_URL}files/song-jiale-resume.pdf`} download="宋家乐-视觉AI设计师-简历.pdf">下载简历 ↓</a>
             </div>
-          </div>
-          <div className="hero-index" aria-hidden="true">
-            <strong>01</strong><span>02</span><span>03</span><span>04</span>
-          </div>
-          <div className="hero-foot">
-            <article><span>01</span><div><strong>视觉设计</strong><p>从概念到完整视觉系统</p></div></article>
-            <article><span>02</span><div><strong>AI 影像</strong><p>生成、控制与连续叙事</p></div></article>
-            <article><span>03</span><div><strong>品牌表达</strong><p>让风格服务于商业目标</p></div></article>
           </div>
         </div>
       </section>
@@ -477,17 +469,13 @@ function App() {
       </section>
 
       <section className="comic-page section shell" id="comic">
-        <header className="section-head" data-reveal>
-          <span>03 / AI COMIC</span>
-          <p>从视觉资产生成到连续镜头控制，探索生成式影像的叙事能力。</p>
-        </header>
         <div className="comic-category">
           <div className="video-category-head" data-reveal>
             <div>
-              <span>AI COMIC SERIES</span>
-              <h2>AI 漫剧</h2>
+              <span>腾讯视频 · 红果 · Vibe Reels</span>
+              <h2>AI 漫剧与短剧</h2>
             </div>
-            <p>参与角色与场景视觉资产生成、镜头调整和成片剪辑。《炼气 3000 层》《大夏镇妖录：黑猪传》已在腾讯视频上线，《人生巅峰全靠捡》《绝世强龙》已在红果上线。</p>
+            <p>项目涵盖角色与场景视觉资产生成、镜头调整和成片剪辑。点击卡片下方的按钮即可观看剧集片段。</p>
           </div>
           <div className="comic-project-grid">
             {comicProjects.map((project) => (
@@ -498,12 +486,10 @@ function App() {
                   ) : (
                     <video src={project.video} muted loop autoPlay playsInline preload="metadata" aria-label={`${project.title}视频画面`} />
                   )}
-                  <span className="comic-no">{project.no}</span>
-                  <span className="comic-badge">{project.badge}</span>
                 </div>
                 <div className="comic-project-info">
                   <div>
-                    <span>AI COMIC · 2026</span>
+                    <span>{project.badge}</span>
                     <h3>{project.title}</h3>
                     <p>{project.subtitle}</p>
                   </div>
@@ -518,39 +504,16 @@ function App() {
       </section>
 
       <section className="award-work section shell" id="work">
-        <header className="section-head" data-reveal>
-          <span>04 / AWARD WORK</span>
-          <p>中国好创意「非遗出海·智创未来」人工智能生成专项大赛，人工智能生成视频类全国总决赛一等奖。</p>
-        </header>
-        <div className="award-heading" data-reveal>
-          <div>
-            <span>CHINA CREATIVE CHALLENGES · NATIONAL FIRST PRIZE</span>
-            <h2>醒狮<br /><i>入梦</i></h2>
-          </div>
-          <div className="award-copy">
-            <p>以国家级非遗“醒狮”为创作核心，运用 AIGC 构建传统文化与幻想叙事交织的东方视觉短片。</p>
-            <strong>从剧本策划到最终成片，全部由我一人独立完成。</strong>
-          </div>
-        </div>
-        <div className="award-process" data-reveal aria-label="个人独立完成的制作流程">
-          {['剧本策划', '视觉资产', '分镜设计', '视频生成', '剪辑包装'].map((step, index) => (
-            <span key={step}><i>{String(index + 1).padStart(2, '0')}</i>{step}</span>
-          ))}
-        </div>
-        <div className="award-case-meta" data-reveal>
-          <div><span>ROLE / 个人职责</span><strong>独立创作 · 全流程完成</strong></div>
-          <div><span>FORMAT / 项目形式</span><strong>AIGC 非遗视觉短片</strong></div>
-          <div><span>RESULT / 项目成果</span><strong>中国好创意人工智能生成视频类全国总决赛一等奖</strong></div>
-        </div>
+        <header className="section-head" data-reveal><span>获奖作品 / AWARD FILM</span></header>
         <div className="award-showcase" data-reveal>
           <figure className="award-poster">
             <img src={awardPoster} alt="《醒狮入梦》作品海报" />
-            <span className="award-mark">01 / AWARD FILM</span>
           </figure>
           <div className="award-view-panel">
-            <span>AWARD-WINNING AIGC FILM · 2026</span>
-            <h3>中国好创意<br />人工智能生成视频类<br /><i>全国总决赛一等奖</i></h3>
-            <p>点击观看《醒狮入梦》完整获奖影片，了解传统醒狮文化与生成式影像结合的完整视觉叙事。</p>
+            <span>中国好创意 ·「非遗出海·智创未来」人工智能生成视频类</span>
+            <h2>醒狮入梦</h2>
+            <p className="award-result">全国总决赛一等奖</p>
+            <p>以国家级非遗醒狮为主题。剧本、视觉资产、分镜、视频生成和剪辑包装均由我独立完成。</p>
             <button type="button" onClick={() => setActivePreview(awardProject)}>
               点击观看完整影片 <i><Arrow diagonal /></i>
             </button>
@@ -559,37 +522,26 @@ function App() {
       </section>
 
       <section className="ability section shell" id="ability">
-        <header className="section-head" data-reveal>
-          <span>05 / CAPABILITIES</span>
-          <p>多种工具，一套完整的创意工作流。</p>
-        </header>
         <div className="ability-heading" data-reveal>
-          <h2>WHAT I<br /><i>BRING</i></h2>
-          <p>从洞察、构思、生成到落地，<br />让创意在每个环节保持一致。</p>
+          <h2>创作能力</h2>
         </div>
         <div className="ability-grid">
           {strengths.map((item) => (
             <article key={item.no} data-reveal>
-              <span className="ability-no">{item.no}</span>
-              <div className="ability-symbol"><span /><span /></div>
               <p className="ability-en">{item.en}</p>
               <h3>{item.title}</h3>
               <p>{item.text}</p>
             </article>
           ))}
         </div>
-        <div className="tool-marquee" aria-hidden="true">
-          <div>CHATGPT · CODEX · GEMINI · MIDJOURNEY · SEEDANCE · KLING · GROK · PREMIERE · AFTER EFFECTS · C4D ·&nbsp;</div>
-        </div>
       </section>
 
       <footer className="contact" id="contact">
         <div className="contact-glow" />
         <div className="shell contact-inner" data-reveal>
-          <div className="eyebrow"><span /> Have a project in mind?</div>
-          <h2>LET'S MAKE<br /><i>SOMETHING</i><br />MEANINGFUL.</h2>
+          <h2>联系我</h2>
           <a className="big-mail" href="mailto:2949026597@qq.com">
-            <span>START A CONVERSATION</span>
+            <span>电子邮箱</span>
             2949026597@qq.com
             <i><Arrow diagonal /></i>
           </a>
