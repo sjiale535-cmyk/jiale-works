@@ -436,7 +436,7 @@ function App() {
               <figcaption><span>宋家乐 / SONG JIALE</span></figcaption>
             </figure>
             <div className="about-content" data-reveal>
-              <h2>视觉 × AI<br /><i>从创意到成片</i></h2>
+              <h2>游戏广告与 AI 影像</h2>
               <p className="about-lead">数字媒体艺术本科在读，具备海外 SLG、Merge 游戏买量广告及商业 AI 漫剧制作经验，累计参与制作 70+ 条游戏广告素材。可独立完成分镜设计、AI 视觉生成、后期剪辑及素材迭代。</p>
               <div className="about-contact">
                 <a href="tel:17739450561"><span>PHONE</span><strong>177 3945 0561</strong></a>

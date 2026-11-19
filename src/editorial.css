@@ -104,6 +104,13 @@ button:focus-visible, a:focus-visible {
   font-weight: 750;
   letter-spacing: -.045em;
 }
+.about-content h2 {
+  font-size: clamp(30px, 3.6vw, 56px);
+  font-weight: 700;
+  line-height: 1.16;
+  letter-spacing: -.035em;
+  text-wrap: balance;
+}
 .section-head > span, .video-category-head span, .detail-label { letter-spacing: .085em; }
 .video-showcase, .comic-page, .award-work { background: transparent; }
 .video-category-head p, .about-lead { color: var(--muted); }
