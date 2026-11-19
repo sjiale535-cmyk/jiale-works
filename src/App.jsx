@@ -212,7 +212,7 @@ function GameOrbit({ items, onPreview }) {
         {items.map((item, index) => {
           const angle = (index * angleStep + rotation) * (Math.PI / 180)
           const depth = Math.cos(angle)
-          const x = Math.sin(angle) * 525
+          const x = Math.sin(angle)
           const y = -depth * 28 + Math.abs(Math.sin(angle)) * 42
           const scale = 0.74 + ((depth + 1) / 2) * 0.3
           const isFront = index === frontIndex
@@ -223,9 +223,9 @@ function GameOrbit({ items, onPreview }) {
               key={item.src}
               data-index={index}
               style={{
-                '--orbit-x': `${x}px`,
+                '--orbit-x': x,
                 '--orbit-y': `${y}px`,
-                '--orbit-z': `${depth * 280}px`,
+                '--orbit-z': `${depth * 160}px`,
                 '--orbit-scale': scale,
                 '--orbit-opacity': 0.36 + ((depth + 1) / 2) * 0.64,
                 zIndex: Math.round((depth + 1) * 50),

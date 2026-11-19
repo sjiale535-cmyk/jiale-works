@@ -166,13 +166,13 @@ section, footer { scroll-margin-top: 86px; }
 .video-caption { display: flex; justify-content: space-between; gap: 20px; padding-top: 17px; border-top: 1px solid var(--line); margin-top: 13px; }
 .video-caption span { color: #6f7772; font-size: 9px; letter-spacing: .16em; }
 .video-caption h4 { margin: 0; font-size: 14px; font-weight: 400; }
-.game-orbit { position: relative; height: 700px; overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); cursor: grab; user-select: none; touch-action: pan-y; perspective: 1300px; background: radial-gradient(circle at 50% 44%, rgba(126,163,205,.12), transparent 35%), linear-gradient(180deg, #0d1114, #080a0c); }
+.game-orbit { --orbit-radius: min(430px, 30vw); --orbit-card-width: clamp(160px, calc((100svh - 150px) * .4), 224px); position: relative; height: clamp(440px, 78svh, 560px); overflow: hidden; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); cursor: grab; user-select: none; touch-action: pan-y; perspective: 1300px; background: radial-gradient(circle at 50% 44%, rgba(126,163,205,.12), transparent 35%), linear-gradient(180deg, #0d1114, #080a0c); }
 .game-orbit:active { cursor: grabbing; }
 .game-orbit::before { content: ''; position: absolute; left: 50%; top: 48%; width: 1120px; height: 390px; transform: translate(-50%,-50%); border: 1px solid rgba(189,251,98,.12); border-radius: 50%; box-shadow: 0 0 90px rgba(189,251,98,.045); }
-.game-orbit-stage { position: absolute; left: 50%; top: 46%; width: 1600px; height: 700px; transform: translate(-50%,-50%); transform-style: preserve-3d; }
-.orbit-card { position: absolute; left: 50%; top: 50%; width: 320px; aspect-ratio: 480 / 836; overflow: hidden; background: #14181b; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 32px 80px rgba(0,0,0,.45); opacity: var(--orbit-opacity); transform: translate(-50%,-50%) translate3d(var(--orbit-x),var(--orbit-y),var(--orbit-z)) scale(var(--orbit-scale)); transform-style: preserve-3d; transition: transform .12s linear, opacity .18s linear, filter .18s linear; pointer-events: none; }
+.game-orbit-stage { position: absolute; inset: 0; transform-style: preserve-3d; }
+.orbit-card { position: absolute; left: 50%; top: 50%; width: var(--orbit-card-width); aspect-ratio: 9 / 16; overflow: hidden; background: #14181b; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 32px 80px rgba(0,0,0,.45); opacity: var(--orbit-opacity); transform: translate(-50%,-50%) translate3d(calc(var(--orbit-x) * var(--orbit-radius)),var(--orbit-y),var(--orbit-z)) scale(var(--orbit-scale)); transform-style: preserve-3d; transition: transform .12s linear, opacity .18s linear, filter .18s linear; pointer-events: none; }
 .orbit-card.is-front { pointer-events: auto; cursor: pointer; border-color: rgba(53,229,223,.42); }
-.orbit-card video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.orbit-card video { display: block; width: 100%; height: 100%; object-fit: contain; }
 .orbit-card-shade { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,5,5,.18), transparent 42%, rgba(4,5,5,.88)); }
 .orbit-index { position: absolute; top: 17px; left: 17px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; color: #0a0d09; background: var(--accent); font-size: 10px; font-weight: 700; }
 .orbit-label { position: absolute; z-index: 2; left: 18px; right: 18px; bottom: 18px; display: flex; flex-direction: column; gap: 5px; }
@@ -335,7 +335,6 @@ section, footer { scroll-margin-top: 86px; }
   .ability-grid article:nth-child(2) { border-right: 0; }
   .ability-grid article:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
   .video-grid { grid-template-columns: repeat(2, 1fr); }
-  .game-orbit-stage { transform: translate(-50%,-50%) scale(.78); }
 }
 
 @media (max-width: 720px) {
@@ -401,8 +400,7 @@ section, footer { scroll-margin-top: 86px; }
   .award-view-panel button { margin-top: 30px; }
   .video-grid { grid-template-columns: 1fr; gap: 48px; }
   .video-card { max-width: 520px; }
-  .game-orbit { height: 610px; }
-  .game-orbit-stage { transform: translate(-50%,-50%) scale(.52); }
+  .game-orbit { --orbit-radius: 24vw; --orbit-card-width: clamp(108px, 35vw, 150px); height: 400px; }
   .orbit-guide { bottom: 18px; }
   .comic-category { padding-top: 0; }
   .comic-project-grid { grid-template-columns: 1fr; }
