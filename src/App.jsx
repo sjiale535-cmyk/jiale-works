@@ -65,6 +65,7 @@ const foundationVideos = Array.from({ length: 7 }, (_, index) => {
 
 const featuredFoundation = {
   ...foundationVideos[1],
+  title: '',
   role: '场景风格定调 / AI 视频生成 / 剪辑包装',
   detail: '素材曾尝试多种视觉风格，包括 2D。',
 }
@@ -473,7 +474,7 @@ function App() {
       <section className="video-showcase section shell" id="videos" aria-labelledby="foundation-heading">
         <header className="section-head" data-reveal>
           <span>游戏买量 / GAME ADVERTISING</span>
-          <p>从叙事切入、玩法展示到卖点与素材版本迭代。</p>
+          <p>海外游戏广告制作与素材风格迭代。</p>
         </header>
 
         <div className="video-category game-category">
@@ -485,7 +486,7 @@ function App() {
             <p>实习期间完成 20 条买量素材，本站精选其中 7 条。</p>
           </div>
           <article className="foundation-feature" data-reveal>
-            <button className="foundation-feature-poster" type="button" onClick={() => setActivePreview(gamePreview(featuredFoundation))} aria-label="播放 Foundation Creative 02">
+            <button className="foundation-feature-poster" type="button" onClick={() => setActivePreview(gamePreview(featuredFoundation))} aria-label="播放 Foundation 主推广告">
               <img src={featuredFoundation.poster} alt="异星地表上的资源、防线和敌群" loading="lazy" />
               <span aria-hidden="true"><Arrow diagonal /></span>
             </button>
@@ -599,7 +600,7 @@ function App() {
             <div className="preview-dialog-head">
               <div>
                 <span>{activePreview.badge}</span>
-                <strong>{activePreview.title} · {activePreview.subtitle}</strong>
+                <strong>{activePreview.subtitle ? `${activePreview.title} · ${activePreview.subtitle}` : activePreview.title}</strong>
                 {activePreview.detail && <p>{activePreview.detail}</p>}
               </div>
               <button type="button" onClick={() => setActivePreview(null)}>关闭 ×</button>
