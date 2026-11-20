@@ -201,6 +201,54 @@ button:focus-visible, a:focus-visible {
 .contact .big-mail { border-color: var(--line); }
 .big-mail > i { color: var(--accent); background: #202a34; border: 1px solid var(--line); }
 
+@keyframes surface-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .cover-title span, .cover-author, .cover-disciplines {
+    animation: surface-in 560ms cubic-bezier(.2, .75, .25, 1) both;
+  }
+  .cover-title span + span { animation-delay: 90ms; }
+  .cover-author { animation-delay: 145ms; }
+  .cover-disciplines { animation-delay: 205ms; }
+  .cover-glass { animation: backdrop-in 520ms ease-out both; }
+
+  [data-reveal] { transform: translateY(14px); transition-duration: 460ms; }
+  [data-reveal]:is(.is-visible, :focus-within) { opacity: 1; transform: none; }
+  .comic-project-card:nth-child(2) { transition-delay: 45ms; }
+  .comic-project-card:nth-child(3) { transition-delay: 90ms; }
+  .comic-project-card:nth-child(n + 4) { transition-delay: 125ms; }
+  .comic-project-card:focus-within { transition-delay: 0ms; }
+
+  .comic-poster :is(img, video) { transition: transform 340ms cubic-bezier(.2, .75, .25, 1); }
+  .comic-project-info button svg, .foundation-feature-poster svg, .foundation-play svg, .award-view-panel button svg, .big-mail svg { transition: transform 200ms ease-out; }
+  .preview-backdrop { animation: backdrop-in 200ms ease-out both; }
+  .preview-dialog { animation: surface-in 280ms cubic-bezier(.2, .75, .25, 1) both; }
+  .menu span { transition: transform 180ms ease-out; }
+  .nav-links.is-open { animation: surface-in 200ms ease-out both; }
+
+  @media (hover: hover) {
+    .comic-project-card:hover .comic-poster :is(img, video) { transform: scale(.98); }
+    .comic-project-info button:hover svg, .foundation-feature-poster:hover svg, .foundation-play:hover svg, .award-view-panel button:hover svg, .big-mail:hover svg { transform: translate(2px, -2px); }
+  }
+}
+
+.menu[aria-expanded="true"] span:first-child { transform: translateY(3.5px) rotate(45deg); }
+.menu[aria-expanded="true"] span:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .nav-links button::after, .orbit-card { transition: none; }
+  .orbit-guide b { animation: none; }
+}
+
 @media (max-width: 720px) {
   .nav { height: 70px; }
   .cover-glass { inset: 80px 8px 12px; backdrop-filter: blur(20px) contrast(.84); }

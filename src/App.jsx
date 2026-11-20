@@ -346,8 +346,14 @@ function App() {
   useEffect(() => {
     const items = document.querySelectorAll('[data-reveal]')
     const observer = new IntersectionObserver(
-      (entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible')),
-      { threshold: 0.12 },
+      (entries, revealObserver) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          entry.target.classList.add('is-visible')
+          revealObserver.unobserve(entry.target)
+        }
+      },
+      { rootMargin: '0px 0px -5% 0px' },
     )
     items.forEach((item) => observer.observe(item))
     return () => observer.disconnect()
@@ -381,21 +387,17 @@ function App() {
   }, [activePreview])
 
   const go = (id) => {
-    document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' })
+    document.querySelector(id)?.scrollIntoView()
     setMenuOpen(false)
   }
 
   return (
     <main>
-      <section className="hero" id="top">
-        <div className="cover-streaks" aria-hidden="true" />
-        <div className="cover-glass" aria-hidden="true" />
-        <CoverGrain />
-        <nav className="nav shell">
+      <nav className="nav shell">
           <button className="monogram" onClick={() => go('#top')} aria-label="回到顶部">
             <span>SONG</span> JIALE
           </button>
-          <div className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
+          <div id="portfolio-navigation" className={`nav-links ${menuOpen ? 'is-open' : ''}`}>
             <button className={activeSection === 'top' ? 'is-active' : ''} onClick={() => go('#top')}>首页</button>
             <button className={activeSection === 'about' ? 'is-active' : ''} onClick={() => go('#about')}>关于</button>
             <button className={['videos', 'merge-ads'].includes(activeSection) ? 'is-active' : ''} onClick={() => go('#videos')}>游戏广告</button>
@@ -405,10 +407,15 @@ function App() {
           <a className="nav-contact" href="mailto:2949026597@qq.com">
             联系我 <Arrow diagonal />
           </a>
-          <button className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-label="打开菜单">
+          <button type="button" className="menu" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="portfolio-navigation" aria-label={menuOpen ? '关闭菜单' : '打开菜单'}>
             <span /><span />
           </button>
-        </nav>
+      </nav>
+
+      <section className="hero" id="top">
+        <div className="cover-streaks" aria-hidden="true" />
+        <div className="cover-glass" aria-hidden="true" />
+        <CoverGrain />
 
         <div className="hero-content shell">
           <div className="cover-main">
