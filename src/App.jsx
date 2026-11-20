@@ -63,6 +63,28 @@ const foundationVideos = Array.from({ length: 7 }, (_, index) => {
   }
 })
 
+const featuredFoundation = {
+  ...foundationVideos[1],
+  role: '场景风格定调 / AI 视频生成 / 剪辑包装',
+  detail: '玩法展示：在异星场景中，通过资源收集、购买防线和抵御敌群呈现生存玩法。素材曾尝试多种视觉风格，包括 2D。',
+}
+const relatedFoundation = foundationVideos.filter(({ no }) => no !== featuredFoundation.no)
+
+function gamePreview(item) {
+  return {
+    badge: '游戏买量广告',
+    title: item.gameName || '游戏买量广告',
+    subtitle: item.title,
+    video: item.src,
+    detail: item.detail || '海外 Merge 游戏投放素材 · 创意构思 / AI 生成 / 剪辑包装',
+    meta: [
+      { label: 'ROLE', value: item.role },
+      { label: 'TOOLS', value: item.tools },
+      { label: 'FORMAT', value: item.format },
+    ],
+  }
+}
+
 const comicProjects = [
   {
     no: '01',
@@ -235,22 +257,6 @@ function GameOrbit({ items, onPreview }) {
     return () => observer.disconnect()
   }, [])
 
-  const openPreview = (item) => {
-    onPreview({
-      ...item,
-      badge: '游戏买量广告',
-      title: item.gameName || '游戏买量广告',
-      subtitle: item.title,
-      video: item.src,
-      detail: item.detail || '海外 Merge 游戏投放素材 · 创意构思 / AI 生成 / 剪辑包装',
-      meta: [
-        { label: 'ROLE', value: item.role },
-        { label: 'TOOLS', value: item.tools },
-        { label: 'FORMAT', value: item.format },
-      ],
-    })
-  }
-
   const startDrag = (event) => {
     const card = event.target.closest('.orbit-card.is-front')
     drag.current = {
@@ -273,7 +279,7 @@ function GameOrbit({ items, onPreview }) {
     const { moved, itemIndex } = drag.current
     drag.current.active = false
     if (event.currentTarget.hasPointerCapture(event.pointerId)) event.currentTarget.releasePointerCapture(event.pointerId)
-    if (!moved && itemIndex === frontIndex) openPreview(items[itemIndex])
+    if (!moved && itemIndex === frontIndex) onPreview(gamePreview(items[itemIndex]))
   }
 
   return (
@@ -412,15 +418,11 @@ function App() {
               <div className="cover-mark" aria-hidden="true"><i /><i /><i /></div>
             </div>
           </div>
-          <div className="cover-edition">
-            <strong>视觉设计</strong>
-            <strong>作品集</strong>
-            <span>PORTFOLIO<br />2025—2026</span>
-          </div>
           <div className="cover-disciplines">
             <span>海外游戏广告</span>
             <span>商业 AI 漫剧</span>
             <span>个人 AI 短片</span>
+            <span className="cover-year">作品集 2025—2026</span>
           </div>
         </div>
       </section>
@@ -480,10 +482,26 @@ function App() {
               <span>FUNPLUS · SLG 游戏广告</span>
               <h2 id="foundation-heading" className="foundation-title">{foundationName}</h2>
             </div>
-            <p>负责分镜设计、AI 视频制作、剪辑与风格迭代。实习期间完成 20 条买量素材，本站精选其中 7 条。</p>
+            <p>实习期间完成 20 条买量素材，本站精选其中 7 条。</p>
           </div>
+          <article className="foundation-feature" data-reveal>
+            <button className="foundation-feature-poster" type="button" onClick={() => setActivePreview(gamePreview(featuredFoundation))} aria-label="播放 Foundation Creative 02">
+              <img src={featuredFoundation.poster} alt="异星地表上的资源、防线和敌群" loading="lazy" />
+              <span aria-hidden="true"><Arrow diagonal /></span>
+            </button>
+            <div className="foundation-feature-copy">
+              <h3>Creative 02</h3>
+              <dl>
+                <div><dt>玩法展示</dt><dd>通过资源收集、购买防线和抵御敌群，展示异星生存玩法。</dd></div>
+                <div><dt>我的职责</dt><dd>确定场景风格、生成视频、剪辑与包装。</dd></div>
+                <div><dt>风格迭代</dt><dd>尝试了多种视觉风格，包括 2D 版本。</dd></div>
+              </dl>
+              <button className="foundation-play" type="button" onClick={() => setActivePreview(gamePreview(featuredFoundation))}>观看广告 <Arrow diagonal /></button>
+            </div>
+          </article>
           <div data-reveal>
-            <GameOrbit items={foundationVideos} onPreview={setActivePreview} />
+            <h3 className="foundation-more">更多 Foundation 广告</h3>
+            <GameOrbit items={relatedFoundation} onPreview={setActivePreview} />
           </div>
         </div>
 
@@ -532,10 +550,10 @@ function App() {
           <div className="award-view-panel">
             <span className="award-competition">
               <strong>中国好创意</strong>
+              <span className="award-result">全国总决赛一等奖</span>
               <span>「非遗出海·智创未来」人工智能生成视频类</span>
             </span>
             <h2>醒狮入梦</h2>
-            <p className="award-result">全国总决赛一等奖</p>
             <p>以国家级非遗醒狮为主题。剧本、视觉资产、分镜、视频生成和剪辑包装均由我独立完成。</p>
             <button type="button" onClick={() => setActivePreview(awardProject)}>
               点击观看完整影片 <i><Arrow diagonal /></i>
