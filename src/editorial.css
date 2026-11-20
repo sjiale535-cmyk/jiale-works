@@ -144,6 +144,14 @@ button:focus-visible, a:focus-visible {
 .short-film-grid { max-width: 1080px; }
 
 .award-showcase, .preview-dialog { background: var(--panel); border-color: var(--line); }
+.award-competition { display: grid; gap: 6px; line-height: 1.5; }
+.award-competition strong {
+  color: #e9ebee;
+  font-size: clamp(22px, 2.15vw, 34px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: .04em;
+}
 .award-view-panel button { border-radius: 0; }
 .award-view-panel button i { border-radius: 0; color: #171717; }
 .ability-grid article:nth-child(n) { background: transparent; border-width: 1px 0 0; padding-inline: 0; }

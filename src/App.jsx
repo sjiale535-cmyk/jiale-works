@@ -530,7 +530,10 @@ function App() {
             <img src={awardPoster} alt="《醒狮入梦》作品海报" />
           </figure>
           <div className="award-view-panel">
-            <span>中国好创意 ·「非遗出海·智创未来」人工智能生成视频类</span>
+            <span className="award-competition">
+              <strong>中国好创意</strong>
+              <span>「非遗出海·智创未来」人工智能生成视频类</span>
+            </span>
             <h2>醒狮入梦</h2>
             <p className="award-result">全国总决赛一等奖</p>
             <p>以国家级非遗醒狮为主题。剧本、视觉资产、分镜、视频生成和剪辑包装均由我独立完成。</p>
