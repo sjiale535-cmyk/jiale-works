@@ -66,7 +66,7 @@ const foundationVideos = Array.from({ length: 7 }, (_, index) => {
 const featuredFoundation = {
   ...foundationVideos[1],
   role: '场景风格定调 / AI 视频生成 / 剪辑包装',
-  detail: '玩法展示：在异星场景中，通过资源收集、购买防线和抵御敌群呈现生存玩法。素材曾尝试多种视觉风格，包括 2D。',
+  detail: '素材曾尝试多种视觉风格，包括 2D。',
 }
 const relatedFoundation = foundationVideos.filter(({ no }) => no !== featuredFoundation.no)
 
@@ -490,9 +490,7 @@ function App() {
               <span aria-hidden="true"><Arrow diagonal /></span>
             </button>
             <div className="foundation-feature-copy">
-              <h3>Creative 02</h3>
               <dl>
-                <div><dt>玩法展示</dt><dd>通过资源收集、购买防线和抵御敌群，展示异星生存玩法。</dd></div>
                 <div><dt>我的职责</dt><dd>确定场景风格、生成视频、剪辑与包装。</dd></div>
                 <div><dt>风格迭代</dt><dd>尝试了多种视觉风格，包括 2D 版本。</dd></div>
               </dl>
